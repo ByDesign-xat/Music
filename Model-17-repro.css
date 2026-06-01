@@ -125,7 +125,7 @@ body::before {
 
 .repro-name {
   position: relative;
-  font-size: 3.0em;
+  font-size: 2.8em;
   font-weight: bold;
   margin-bottom: 5px;
   background: linear-gradient(270deg, #010101, #ff0000, #ffffff, #ff0000, #ffffff, #ff0000, #010101);
