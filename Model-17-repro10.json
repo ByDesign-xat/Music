@@ -1,10 +1,36 @@
 [
-    {
+     {
+      "id": "",
+      "caratula": "https://files.catbox.moe/2mk9wh.jpg",
+      "artista": "MOLIY & Silent Addy - Shake It To The Max",
+      "nombre": "MOLIY & Silent Addy - Shake It To The Max",
+      "album": "Shake It To The Max",
+      "enlace": "https://files.catbox.moe/rshch0.mp3",
+      "genero": "Afro House",
+      "emotion": "Ibiza",
+      "seccion": "music",
+      "duracion": "3:05",
+      "country": ["USA"]
+    },
+	{
+      "id": "",
+      "caratula": "https://files.catbox.moe/jexp91.jpg",
+      "artista": "Tyla - CHANEL",
+      "nombre": "Tyla - CHANEL",
+      "album": "CHANEL",
+      "enlace": "https://files.catbox.moe/th5928.mp3",
+      "genero": "Afro House",
+      "emotion": "Ibiza",
+      "seccion": "music",
+      "duracion": "3:09",
+      "country": ["USA"]
+    },
+	{
       "id": "HUGEL-SOLTO-Jamaican",
       "caratula": "https://files.catbox.moe/50zeh3.jpg",
       "artista": "HUGEL & SOLTO",
-      "nombre": "Jamaican",
-      "album": "Jamaican",
+      "nombre": "HUGEL & SOLTO - Jamaican",
+      "album": "HUGEL & SOLTO - Jamaican",
       "enlace": "https://files.catbox.moe/3ceaw0.mp3",
       "genero": "Afro House",
       "emotion": "Ibiza",
@@ -15,8 +41,8 @@
     {
       "id": "MANDA-Mala",
       "caratula": "https://files.catbox.moe/7h17j2.jpg",
-      "artista": "MANDA",
-      "nombre": "Mala",
+      "artista": "MANDA - Mala",
+      "nombre": "MANDA - Mala",
       "album": "Mala",
       "enlace": "https://files.catbox.moe/zdn6ft.mp3",
       "genero": "Deep House",
@@ -28,8 +54,8 @@
 	{
       "id": "Noizy-Loredana-Heart-attack",
       "caratula": "https://files.catbox.moe/i352r6.jpg",
-      "artista": "Noizy x Loredana",
-      "nombre": "Heart attack",
+      "artista": "Noizy & Loredana - Heart attack",
+      "nombre": "Noizy & Loredana - Heart attack",
       "album": "Heart attack",
       "enlace": "https://files.catbox.moe/pb536t.mp3",
 	  "genero": "Dancehall",
@@ -41,14 +67,27 @@
     {
       "id": "Fantomel-Kate-Linn-Dame",
       "caratula": "https://files.catbox.moe/fda537.jpg",
-      "artista": "Fantomel x Kate Linn ",
-      "nombre": "Dame Un Grrr",
+      "artista": "Fantomel & Kate Linn - Dame Un Grrr",
+      "nombre": "Fantomel & Kate Linn - Dame Un Grrr",
       "album": "Dame Un Grrr",
       "enlace": "https://files.catbox.moe/bs1muu.mp3",
       "genero": "Dance-Pop",
       "emotion": "teasing",
       "seccion": "music",
       "duracion": "3:23",
+      "country": ["European"]
+    },
+    {
+      "id": "Fantomel-Kate-Linn-Dame",
+      "caratula": "https://files.catbox.moe/bs4acb.jpg",
+      "artista": "ROSA & Bruno Mars - APT.",
+      "nombre": "ROSA & Bruno Mars - APT.",
+      "album": "APT.",
+      "enlace": "https://files.catbox.moe/brrha5.mp3",
+      "genero": "Dance-Pop",
+      "emotion": "teasing",
+      "seccion": "music",
+      "duracion": "2:53",
       "country": ["European"]
     }
 
