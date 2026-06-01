@@ -236,6 +236,18 @@ audio.addEventListener("pause", () => {
   actualizarEstadoCaratula();
 });
 
+audio.addEventListener("playing", () => {
+  const track = trackData[currentTrack];
+
+  console.log("🎵 Playing:", track?.name);
+
+  if (track?.cover) {
+    console.log("🖼 Cover:", track.cover);
+    discImg.src = track.cover;
+    discImg.classList.add("rotating");
+  }
+});
+
 // ✅ Evento al cargar DOM: mostrar Plato antes de cargar pista
 document.addEventListener("DOMContentLoaded", () => {
   const discImg = document.querySelector('.disc-img');
@@ -595,3 +607,6 @@ function animateParticles() {
 }
 
 animateParticles();
+
+
+
