@@ -138,26 +138,20 @@ audio.addEventListener("ended", () => {
     return;
   }
 
-  if (autoplayEnabled) {
-    // ▶️ Reproducción continua sin modo activo
-    const nextIndex = currentTrack + 1;
-    const nextTrack = trackData[nextIndex];
-
-    if (!nextTrack || !nexttrack.enlace) {
-      console.log("⏹ Fin de pista sin repetición");
-      autoplayEnabled = false;
-      discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
-      discImg.classList.add("rotating");
-      actualizarEstadoCaratula();
-      return;
-    }
+if (autoplayEnabled) {
+    playTrack(
+        (currentTrack + 1) % trackData.length,
+        true
+    );
+    return;
+}
 
     currentTrack = nextIndex;
-    currentTrackName.textContent = nexttrack.nombre;
-    audio.src = nexttrack.enlace;
+    currentTrackName.textContent = nextTrack.nombre;
+    audio.src = nextTrack.enlace;
 
     audio.play().then(() => {
-      discImg.src = nexttrack.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
+      discImg.src = nextTrack.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       iconPlay.classList.add("hidden");
       iconPause.classList.remove("hidden");
@@ -202,7 +196,8 @@ function actualizarEstadoCaratula() {
   const discImg = document.querySelector('.disc-img');
   if (!discImg) return;
 
-  const hasTrack = trackData[currentTrack] && trackData[currentTrack].cover;
+  const hasTrack = trackData[currentTrack] &&
+                   trackData[currentTrack].caratula;
   const isPlaying = !audio.paused && audio.currentTime > 0;
   const isPaused = audio.paused && audio.currentTime > 0;
   const isIdle = audio.currentTime === 0;
@@ -210,7 +205,7 @@ function actualizarEstadoCaratula() {
   if (isPlaying && hasTrack) {
     // 🔄 Reproducción activa: portada del track + animación
     discImg.classList.add("rotating");
-    discImg.src = trackData[currentTrack].cover;
+    discImg.src = trackData[currentTrack].caratula;
   } else if (isPaused) {
     // ⏸ Pausa: disco detenido sin animación
     discImg.classList.remove("rotating");
@@ -236,33 +231,6 @@ audio.addEventListener("pause", () => {
   actualizarEstadoCaratula();
 });
 
-// ✅ Evento al cargar DOM: mostrar Plato antes de cargar pista
-document.addEventListener("DOMContentLoaded", () => {
-  const discImg = document.querySelector('.disc-img');
-  if (discImg) {
-    discImg.classList.remove("rotating");
-    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png"; // ✅ Mostrar Plato al iniciar
-  }
-
-  // ✅ Cargar pista sin activar portada ni reproducción
-  fetch("Model-17-repro10.json")
-    .then(res => res.json())
-    .then(data => {
-      trackData = data;
-      if (!Array.isArray(trackData) || trackData.length === 0) {
-        console.warn("❌ No se encontraron pistas");
-        return;
-      }
-
-      currentTrack = 0;
-      currentTrackName.textContent = trackData[0].name;
-      audio.src = trackData[0].url;
-
-      // ✅ No mostrar portada ni activar animación aún
-      audio.load(); // Carga el audio sin reproducir
-      actualizarEstadoCaratula(); // Refuerza visual tras carga
-    });
-});
     
 // ===============================
 // 🎛️ BOTÓN MENU — MODAL ✓
@@ -505,25 +473,6 @@ function playTrack(index, autoplay = true) {
   });
 
   console.log("🔀 Lista mezclada. Nueva danza iniciada.");
-});
-
-  // ===============================
-  // 🎯 Sincronización visual con eventos del audio
-  // ===============================
-  audio.addEventListener("play", () => {
-    iconPlay.classList.add("hidden");
-    iconPause.classList.remove("hidden");
-  });
-
-  audio.addEventListener("pause", () => {
-    iconPause.classList.add("hidden");
-    iconPlay.classList.remove("hidden");
-  });
-
-  audio.addEventListener("ended", () => {
-    iconPause.classList.add("hidden");
-    iconPlay.classList.remove("hidden");
-  });
 });
 
 // ===============================
