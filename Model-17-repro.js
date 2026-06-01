@@ -43,7 +43,7 @@ preloadPlato.src = "assets/covers/Plato.png";
   // ===============================
   // 🎼 Cargar metadata y generar lista ✓
   // ===============================
-  fetch("Model-17-repro10")
+  fetch("Model-17-repro10.json")
     .then(res => res.json())
     .then(data => {
       trackData = data;
@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ✅ Cargar pista sin activar portada ni reproducción
-  fetch("Model-17-repro10")
+  fetch("Model-17-repro10.json")
     .then(res => res.json())
     .then(data => {
       trackData = data;
