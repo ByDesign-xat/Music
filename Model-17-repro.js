@@ -38,7 +38,7 @@ const preloadBase = new Image();
 preloadBase.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
 
 const preloadPlato = new Image();
-preloadPlato.src = "assets/covers/Plato.png";
+preloadPlato.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
 
   // ===============================
   // 🎼 Cargar metadata y generar lista ✓
@@ -76,7 +76,7 @@ preloadPlato.src = "assets/covers/Plato.png";
 // ===============================
 function restaurarPlato() {
   discImg.classList.remove("rotating"); // ✅ Detener animación
-  discImg.src = "assets/covers/Plato.png"; // ✅ Mostrar Plato
+  discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png"; // ✅ Mostrar Plato
 }
 
 // ===============================
@@ -116,7 +116,7 @@ audio.addEventListener("ended", () => {
 
     if (!track || !track.url) {
       console.warn("❌ Track inválido. Deteniendo reproducción.");
-      discImg.src = "assets/covers/Plato.png";
+      discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       actualizarEstadoCaratula();
       return;
@@ -146,7 +146,7 @@ audio.addEventListener("ended", () => {
     if (!nextTrack || !nextTrack.url) {
       console.log("⏹ Fin de pista sin repetición");
       autoplayEnabled = false;
-      discImg.src = "assets/covers/Plato.png";
+      discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       actualizarEstadoCaratula();
       return;
@@ -171,7 +171,7 @@ audio.addEventListener("ended", () => {
   }
 
   // ⏹ Sin modo y sin autoplayEnabled
-  discImg.src = "assets/covers/Plato.png";
+  discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
   discImg.classList.add("rotating");
   actualizarEstadoCaratula();
   console.log("⏹ Fin de pista sin repetición");
@@ -218,7 +218,7 @@ function actualizarEstadoCaratula() {
   } else if (isIdle) {
     // 💤 Reposo: sin reproducción ni pista activa
     discImg.classList.remove("rotating");
-    discImg.src = "assets/covers/Plato.png";
+    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
   }
 }
 
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const discImg = document.querySelector('.disc-img');
   if (discImg) {
     discImg.classList.remove("rotating");
-    discImg.src = "assets/covers/Plato.png"; // ✅ Mostrar Plato al iniciar
+    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png"; // ✅ Mostrar Plato al iniciar
   }
 
   // ✅ Cargar pista sin activar portada ni reproducción
