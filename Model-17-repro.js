@@ -43,7 +43,7 @@ preloadPlato.src = "assets/covers/Plato.png";
   // ===============================
   // 🎼 Cargar metadata y generar lista ✓
   // ===============================
-  fetch("Repro10.json")
+  fetch("https://iraked.github.io/ExtasisRadio/Repro10.json")
     .then(res => res.json())
     .then(data => {
       trackData = data;
@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ✅ Cargar pista sin activar portada ni reproducción
-  fetch("Repro11.json")
+  fetch("https://iraked.github.io/ExtasisRadio/Repro11.json")
     .then(res => res.json())
     .then(data => {
       trackData = data;
