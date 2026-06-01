@@ -68,7 +68,7 @@ preloadPlato.src = "assets/covers/Plato.png";
         trackList.appendChild(li);
       });
 
-      playTrack(0, false);
+      playTrack(0, true);
     });
 
 // ===============================
