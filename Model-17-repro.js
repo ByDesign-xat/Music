@@ -203,9 +203,9 @@ function actualizarEstadoCaratula() {
   if (!discImg) return;
 
   const hasTrack = trackData[currentTrack] && trackData[currentTrack].cover;
-  const isPlaying = !audio.paused && audio.currentTime > 0;
+  const isPlaying = !audio.paused;
   const isPaused = audio.paused && audio.currentTime > 0;
-  const isIdle = audio.currentTime === 0;
+  const isIdle = audio.paused && audio.currentTime === 0;
 
   if (isPlaying && hasTrack) {
     // 🔄 Reproducción activa: portada del track + animación
