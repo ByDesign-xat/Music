@@ -10,7 +10,7 @@
       "emotion": "Ibiza",
       "seccion": "music",
       "duracion": "3:05",
-      "country": ["USA"]
+      "country": ["European"]
     },
 	{
       "id": "",
@@ -23,10 +23,23 @@
       "emotion": "Ibiza",
       "seccion": "music",
       "duracion": "3:09",
-      "country": ["USA"]
+      "country": ["European"]
     },
 	{
-      "id": "HUGEL-SOLTO-Jamaican",
+      "id": "",
+      "cover": "https://files.catbox.moe/3vpoa3.jpg",
+      "artista": "Costi & Adrian Saguna & Benzol - Solo tuu",
+      "name": "Costi & Adrian Saguna & Benzol - Solo tuu",
+      "album": "Costi & Adrian Saguna & Benzol - Solo tuu",
+      "url": "https://files.catbox.moe/xglh29.mp3",
+      "genero": "Afro House",
+      "emotion": "Ibiza",
+      "seccion": "music",
+      "duracion": "3:31",
+      "country": ["European"]
+    },
+	{
+      "id": "",
       "cover": "https://files.catbox.moe/50zeh3.jpg",
       "artista": "HUGEL & SOLTO",
       "name": "HUGEL & SOLTO - Jamaican",
@@ -36,7 +49,7 @@
       "emotion": "Ibiza",
       "seccion": "music",
       "duracion": "4:07",
-      "country": ["USA"]
+      "country": ["European"]
     },
     {
       "id": "MANDA-Mala",
@@ -93,3 +106,4 @@
 
 
   ]
+
