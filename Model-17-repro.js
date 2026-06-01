@@ -35,10 +35,10 @@ trackData.forEach(track => {
 });
 
 const preloadBase = new Image();
-preloadBase.src = "assets/covers/Cover-Vinyl-Disc-FX1.png";
+preloadBase.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
 
 const preloadPlato = new Image();
-preloadPlato.src = "assets/covers/Plato.png";
+preloadPlato.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
 
   // ===============================
   // 🎼 Cargar metadata y generar lista ✓
@@ -76,7 +76,7 @@ preloadPlato.src = "assets/covers/Plato.png";
 // ===============================
 function restaurarPlato() {
   discImg.classList.remove("rotating"); // ✅ Detener animación
-  discImg.src = "assets/covers/Plato.png"; // ✅ Mostrar Plato
+  discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png"; // ✅ Mostrar Plato
 }
 
 // ===============================
@@ -116,7 +116,7 @@ audio.addEventListener("ended", () => {
 
     if (!track || !track.enlace) {
       console.warn("❌ Track inválido. Deteniendo reproducción.");
-      discImg.src = "assets/covers/Plato.png";
+      discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       actualizarEstadoCaratula();
       return;
@@ -126,7 +126,7 @@ audio.addEventListener("ended", () => {
     audio.src = track.enlace;
 
     audio.play().then(() => {
-      discImg.src = track.caratula || "assets/covers/Cover-Vinyl-Disc-FX1.png";
+      discImg.src = track.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       iconPlay.classList.add("hidden");
       iconPause.classList.remove("hidden");
@@ -146,7 +146,7 @@ audio.addEventListener("ended", () => {
     if (!nextTrack || !nexttrack.enlace) {
       console.log("⏹ Fin de pista sin repetición");
       autoplayEnabled = false;
-      discImg.src = "assets/covers/Plato.png";
+      discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       actualizarEstadoCaratula();
       return;
@@ -157,7 +157,7 @@ audio.addEventListener("ended", () => {
     audio.src = nexttrack.enlace;
 
     audio.play().then(() => {
-      discImg.src = nexttrack.caratula || "assets/covers/Cover-Vinyl-Disc-FX1.png";
+      discImg.src = nexttrack.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       iconPlay.classList.add("hidden");
       iconPause.classList.remove("hidden");
@@ -171,7 +171,7 @@ audio.addEventListener("ended", () => {
   }
 
   // ⏹ Sin modo y sin autoplayEnabled
-  discImg.src = "assets/covers/Plato.png";
+  discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
   discImg.classList.add("rotating");
   actualizarEstadoCaratula();
   console.log("⏹ Fin de pista sin repetición");
@@ -182,7 +182,7 @@ audio.addEventListener("pause", () => {
   iconPause.classList.add("hidden");
   iconPlay.classList.remove("hidden");
 
-  discImg.src = "assets/covers/Cover-Vinyl-Disc-FX1.png";
+  discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
   discImg.classList.remove("rotating");
   actualizarEstadoCaratula();
 });
@@ -214,11 +214,11 @@ function actualizarEstadoCaratula() {
   } else if (isPaused) {
     // ⏸ Pausa: disco detenido sin animación
     discImg.classList.remove("rotating");
-    discImg.src = "assets/covers/Cover-Vinyl-Disc-FX1.png";
+    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
   } else if (isIdle) {
     // 💤 Reposo: sin reproducción ni pista activa
     discImg.classList.remove("rotating");
-    discImg.src = "assets/covers/Plato.png";
+    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
   }
 }
 
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const discImg = document.querySelector('.disc-img');
   if (discImg) {
     discImg.classList.remove("rotating");
-    discImg.src = "assets/covers/Plato.png"; // ✅ Mostrar Plato al iniciar
+    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png"; // ✅ Mostrar Plato al iniciar
   }
 
   // ✅ Cargar pista sin activar portada ni reproducción
@@ -446,7 +446,7 @@ function playTrack(index, autoplay = true) {
   if (autoplay) {
     audio.play().then(() => {
       // ✅ Solo después de que el audio comienza, actualizamos visuales
-      discImg.src = track.caratula || "assets/covers/Cover-Vinyl-Disc-FX1.png";
+      discImg.src = track.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.remove("rotating");
       void discImg.offsetWidth;
       discImg.classList.add("rotating");
@@ -461,7 +461,7 @@ function playTrack(index, autoplay = true) {
       console.warn("❌ Error al reproducir pista:", err);
     });
   } else {
-    discImg.src = "assets/covers/Cover-Vinyl-Disc-FX1.png";
+    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
     discImg.classList.remove("rotating");
     iconPause.classList.add("hidden");
     iconPlay.classList.remove("hidden");
