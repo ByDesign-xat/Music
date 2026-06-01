@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let autoplayEnabled = false; // ✅ Controla si debe avanzar automáticamente
     
 trackData.forEach(track => {
-  if (track.caratula) {
+  if (track.cover) {
     const preload = new Image();
-    preload.src = track.caratula;
+    preload.src = track.cover;
   }
 });
 
@@ -38,15 +38,21 @@ const preloadBase = new Image();
 preloadBase.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
 
 const preloadPlato = new Image();
-preloadPlato.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
+preloadPlato.src = "assets/covers/Plato.png";
 
   // ===============================
   // 🎼 Cargar metadata y generar lista ✓
   // ===============================
-  fetch("Model-17-repro10.json")
+  fetch("Model-17-repro10")
     .then(res => res.json())
     .then(data => {
       trackData = data;
+	  trackData = data.map(track => ({
+    name: track.nombre,
+    url: track.enlace,
+    cover: track.caratula,
+    artist: track.artista
+}));
       if (!Array.isArray(trackData) || trackData.length === 0) {
         console.warn("❌ No se encontraron pistas");
         return;
@@ -56,7 +62,7 @@ preloadPlato.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
 
       trackData.forEach((track, index) => {
         const li = document.createElement("li");
-        li.textContent = track.nombre;
+        li.textContent = track.name;
         li.classList.add("modal-track-item");
         li.setAttribute("data-index", index);
 
@@ -76,7 +82,7 @@ preloadPlato.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
 // ===============================
 function restaurarPlato() {
   discImg.classList.remove("rotating"); // ✅ Detener animación
-  discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png"; // ✅ Mostrar Plato
+  discImg.src = "assets/covers/Plato.png"; // ✅ Mostrar Plato
 }
 
 // ===============================
@@ -97,8 +103,8 @@ audio.addEventListener("ended", () => {
     audio.currentTime = 0;
     audio.play().then(() => {
       const track = trackData[currentTrack];
-      if (track && track.caratula) {
-        discImg.src = track.caratula;
+      if (track && track.cover) {
+        discImg.src = track.cover;
         discImg.classList.add("rotating");
         actualizarEstadoCaratula();
       }
@@ -114,19 +120,19 @@ audio.addEventListener("ended", () => {
     currentTrack = (currentTrack + 1) % trackData.length;
     const track = trackData[currentTrack];
 
-    if (!track || !track.enlace) {
+    if (!track || !track.url) {
       console.warn("❌ Track inválido. Deteniendo reproducción.");
-      discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
+      discImg.src = "assets/covers/Plato.png";
       discImg.classList.add("rotating");
       actualizarEstadoCaratula();
       return;
     }
 
-    currentTrackName.textContent = track.nombre;
-    audio.src = track.enlace;
+    currentTrackName.textContent = track.name;
+    audio.src = track.url;
 
     audio.play().then(() => {
-      discImg.src = track.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
+      discImg.src = track.cover || "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       iconPlay.classList.add("hidden");
       iconPause.classList.remove("hidden");
@@ -138,20 +144,26 @@ audio.addEventListener("ended", () => {
     return;
   }
 
-if (autoplayEnabled) {
-    playTrack(
-        (currentTrack + 1) % trackData.length,
-        true
-    );
-    return;
-}
+  if (autoplayEnabled) {
+    // ▶️ Reproducción continua sin modo activo
+    const nextIndex = currentTrack + 1;
+    const nextTrack = trackData[nextIndex];
+
+    if (!nextTrack || !nextTrack.url) {
+      console.log("⏹ Fin de pista sin repetición");
+      autoplayEnabled = false;
+      discImg.src = "assets/covers/Plato.png";
+      discImg.classList.add("rotating");
+      actualizarEstadoCaratula();
+      return;
+    }
 
     currentTrack = nextIndex;
-    currentTrackName.textContent = nexttrack.nombre;
-    audio.src = nexttrack.enlace;
+    currentTrackName.textContent = nextTrack.name;
+    audio.src = nextTrack.url;
 
     audio.play().then(() => {
-      discImg.src = nexttrack.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
+      discImg.src = nextTrack.cover || "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
       iconPlay.classList.add("hidden");
       iconPause.classList.remove("hidden");
@@ -165,7 +177,7 @@ if (autoplayEnabled) {
   }
 
   // ⏹ Sin modo y sin autoplayEnabled
-  discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
+  discImg.src = "assets/covers/Plato.png";
   discImg.classList.add("rotating");
   actualizarEstadoCaratula();
   console.log("⏹ Fin de pista sin repetición");
@@ -196,7 +208,7 @@ function actualizarEstadoCaratula() {
   const discImg = document.querySelector('.disc-img');
   if (!discImg) return;
 
-  const hasTrack = trackData[currentTrack] && trackData[currentTrack].caratula;
+  const hasTrack = trackData[currentTrack] && trackData[currentTrack].cover;
   const isPlaying = !audio.paused && audio.currentTime > 0;
   const isPaused = audio.paused && audio.currentTime > 0;
   const isIdle = audio.currentTime === 0;
@@ -204,7 +216,7 @@ function actualizarEstadoCaratula() {
   if (isPlaying && hasTrack) {
     // 🔄 Reproducción activa: portada del track + animación
     discImg.classList.add("rotating");
-    discImg.src = trackData[currentTrack].caratula;
+    discImg.src = trackData[currentTrack].cover;
   } else if (isPaused) {
     // ⏸ Pausa: disco detenido sin animación
     discImg.classList.remove("rotating");
@@ -212,7 +224,7 @@ function actualizarEstadoCaratula() {
   } else if (isIdle) {
     // 💤 Reposo: sin reproducción ni pista activa
     discImg.classList.remove("rotating");
-    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
+    discImg.src = "assets/covers/Plato.png";
   }
 }
 
@@ -228,6 +240,40 @@ audio.addEventListener("pause", () => {
   iconPause.classList.add("hidden");
   iconPlay.classList.remove("hidden");
   actualizarEstadoCaratula();
+});
+
+// ✅ Evento al cargar DOM: mostrar Plato antes de cargar pista
+document.addEventListener("DOMContentLoaded", () => {
+  const discImg = document.querySelector('.disc-img');
+  if (discImg) {
+    discImg.classList.remove("rotating");
+    discImg.src = "assets/covers/Plato.png"; // ✅ Mostrar Plato al iniciar
+  }
+
+  // ✅ Cargar pista sin activar portada ni reproducción
+  fetch("Model-17-repro10")
+    .then(res => res.json())
+    .then(data => {
+      trackData = data;
+	  trackData = data.map(track => ({
+    name: track.nombre,
+    url: track.enlace,
+    cover: track.caratula,
+    artist: track.artista
+}));
+      if (!Array.isArray(trackData) || trackData.length === 0) {
+        console.warn("❌ No se encontraron pistas");
+        return;
+      }
+
+      currentTrack = 0;
+      currentTrackName.textContent = trackData[0].name;
+      audio.src = trackData[0].url;
+
+      // ✅ No mostrar portada ni activar animación aún
+      audio.load(); // Carga el audio sin reproducir
+      actualizarEstadoCaratula(); // Refuerza visual tras carga
+    });
 });
     
 // ===============================
@@ -321,7 +367,7 @@ nextBtn?.addEventListener("click", () => {
       if (!trackData || trackData.length === 0 || currentTrack === null) return;
       currentTrack = (currentTrack + 1) % trackData.length;
       playTrack(currentTrack, true);
-      console.log("⏭ Cambio a pista siguiente:", trackData[currentTrack].nombre);
+      console.log("⏭ Cambio a pista siguiente:", trackData[currentTrack].name);
       forwardClickCount = 0;
     }, 300);
   }
@@ -400,19 +446,19 @@ function playTrack(index, autoplay = true) {
   }
 
   const track = trackData[index];
-  if (!track || !track.enlace) {
+  if (!track || !track.url) {
     restaurarPlato();
     return;
   }
 
   currentTrack = index;
-  currentTrackName.textContent = track.nombre;
-  audio.src = track.enlace;
+  currentTrackName.textContent = track.name;
+  audio.src = track.url;
 
   if (autoplay) {
     audio.play().then(() => {
       // ✅ Solo después de que el audio comienza, actualizamos visuales
-      discImg.src = track.caratula || "https://xatimg.com/image/OpwOSS8vdSd3.png";
+      discImg.src = track.cover || "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.remove("rotating");
       void discImg.offsetWidth;
       discImg.classList.add("rotating");
@@ -422,7 +468,7 @@ function playTrack(index, autoplay = true) {
 
       // ✅ Invocación directa del estado visual
       actualizarEstadoCaratula();
-      console.log("▶️ Reproduciendo:", track.nombre);
+      console.log("▶️ Reproduciendo:", track.name);
     }).catch(err => {
       console.warn("❌ Error al reproducir pista:", err);
     });
@@ -432,7 +478,7 @@ function playTrack(index, autoplay = true) {
     iconPause.classList.add("hidden");
     iconPlay.classList.remove("hidden");
     actualizarEstadoCaratula();
-    console.log("⏸ Pista cargada sin reproducción:", track.nombre);
+    console.log("⏸ Pista cargada sin reproducción:", track.name);
   }
 }
 
@@ -460,7 +506,7 @@ function playTrack(index, autoplay = true) {
   trackList.innerHTML = "";
   trackData.forEach((track, index) => {
     const li = document.createElement("li");
-    li.textContent = track.nombre;
+    li.textContent = track.name;
     li.classList.add("modal-track-item");
     li.setAttribute("data-index", index);
     li.addEventListener("click", () => {
