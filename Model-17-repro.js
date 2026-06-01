@@ -47,12 +47,6 @@ preloadPlato.src = "assets/covers/Plato.png";
     .then(res => res.json())
     .then(data => {
       trackData = data;
-	  trackData = data.map(track => ({
-    name: track.nombre,
-    url: track.enlace,
-    cover: track.caratula,
-    artist: track.artista
-}));
       if (!Array.isArray(trackData) || trackData.length === 0) {
         console.warn("❌ No se encontraron pistas");
         return;
@@ -255,12 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(data => {
       trackData = data;
-	  trackData = data.map(track => ({
-    name: track.nombre,
-    url: track.enlace,
-    cover: track.caratula,
-    artist: track.artista
-}));
       if (!Array.isArray(trackData) || trackData.length === 0) {
         console.warn("❌ No se encontraron pistas");
         return;
