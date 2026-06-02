@@ -673,3 +673,24 @@ document.addEventListener("contextmenu", (e) => {
   setTimeout(() => msg.classList.remove("show"), 2000);
 
 });
+
+audio.addEventListener("ended", () => {
+
+  if (modoActual !== "local") return;
+
+  // repetă aceeași piesă
+  if (repeatMode === "track") {
+    activarReproduccion(currentTrack, "repeat");
+    return;
+  }
+
+  // următoarea piesă
+  let nextTrack = currentTrack + 1;
+
+  // dacă a ajuns la finalul playlistului
+  if (nextTrack >= trackData.length) {
+    nextTrack = 0;
+  }
+
+  activarReproduccion(nextTrack, "auto-next");
+});
