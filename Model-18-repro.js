@@ -403,7 +403,7 @@ function iniciarActualizacionRadio() {
   }
 
   actualizar();
-  radioIntervalId = setInterval(actualizar, 5000);
+  radioIntervalId = setInterval(actualizar, 8000);
 }
 
 // ===============================
