@@ -1,0 +1,109 @@
+[
+     {
+      "id": "",
+      "cover": "https://files.catbox.moe/2mk9wh.jpg",
+      "artista": "MOLIY & Silent Addy - Shake It To The Max",
+      "name": "MOLIY & Silent Addy - Shake It To The Max",
+      "album": "Shake It To The Max",
+      "url": "https://files.catbox.moe/rshch0.mp3",
+      "genero": "Afro House",
+      "emotion": "Ibiza",
+      "seccion": "music",
+      "duracion": "3:05",
+      "country": ["European"]
+    },
+	{
+      "id": "",
+      "cover": "https://files.catbox.moe/jexp91.jpg",
+      "artista": "Tyla - CHANEL",
+      "name": "Tyla - CHANEL",
+      "album": "CHANEL",
+      "url": "https://files.catbox.moe/th5928.mp3",
+      "genero": "Afro House",
+      "emotion": "Ibiza",
+      "seccion": "music",
+      "duracion": "3:09",
+      "country": ["European"]
+    },
+	{
+      "id": "",
+      "cover": "https://files.catbox.moe/3vpoa3.jpg",
+      "artista": "Costi & Adrian Saguna & Benzol - Solo tuu",
+      "name": "Costi & Adrian Saguna & Benzol - Solo tuu",
+      "album": "Costi & Adrian Saguna & Benzol - Solo tuu",
+      "url": "https://files.catbox.moe/xglh29.mp3",
+      "genero": "Afro House",
+      "emotion": "Ibiza",
+      "seccion": "music",
+      "duracion": "3:31",
+      "country": ["European"]
+    },
+	{
+      "id": "",
+      "cover": "https://files.catbox.moe/50zeh3.jpg",
+      "artista": "HUGEL & SOLTO",
+      "name": "HUGEL & SOLTO - Jamaican",
+      "album": "HUGEL & SOLTO - Jamaican",
+      "url": "https://files.catbox.moe/3ceaw0.mp3",
+      "genero": "Afro House",
+      "emotion": "Ibiza",
+      "seccion": "music",
+      "duracion": "4:07",
+      "country": ["European"]
+    },
+    {
+      "id": "MANDA-Mala",
+      "cover": "https://files.catbox.moe/7h17j2.jpg",
+      "artista": "MANDA - Mala",
+      "name": "MANDA - Mala",
+      "album": "Mala",
+      "url": "https://files.catbox.moe/zdn6ft.mp3",
+      "genero": "Deep House",
+      "emotion": "obsesion",
+      "seccion": "music",
+      "duracion": "4:23",
+      "country": ["European"]
+    },
+	{
+      "id": "Noizy-Loredana-Heart-attack",
+      "cover": "https://files.catbox.moe/i352r6.jpg",
+      "artista": "Noizy & Loredana - Heart attack",
+      "name": "Noizy & Loredana - Heart attack",
+      "album": "Heart attack",
+      "url": "https://files.catbox.moe/pb536t.mp3",
+	  "genero": "Dancehall",
+      "emotion": "deep",
+      "seccion": "music",
+      "duracion": "2:37",
+      "country": ["Albania"]
+    },
+    {
+      "id": "Fantomel-Kate-Linn-Dame",
+      "cover": "https://files.catbox.moe/fda537.jpg",
+      "artista": "Fantomel & Kate Linn - Dame Un Grrr",
+      "name": "Fantomel & Kate Linn - Dame Un Grrr",
+      "album": "Dame Un Grrr",
+      "url": "https://files.catbox.moe/bs1muu.mp3",
+      "genero": "Dance-Pop",
+      "emotion": "teasing",
+      "seccion": "music",
+      "duracion": "3:23",
+      "country": ["European"]
+    },
+    {
+      "id": "Fantomel-Kate-Linn-Dame",
+      "cover": "https://files.catbox.moe/bs4acb.jpg",
+      "artista": "ROSA & Bruno Mars - APT.",
+      "name": "ROSA & Bruno Mars - APT.",
+      "album": "APT.",
+      "url": "https://files.catbox.moe/brrha5.mp3",
+      "genero": "Dance-Pop",
+      "emotion": "teasing",
+      "seccion": "music",
+      "duracion": "2:53",
+      "country": ["European"]
+    }
+
+
+  ]
+
