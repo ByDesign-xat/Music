@@ -88,7 +88,7 @@ function activarReproduccion(index, modo = "manual") {
   const track = trackData[index];
 
   // Usamos dropbox_url como fuente principal
-  const url = track.dropbox_url || track.url;
+  const url = track.url;
   if (!url) {
     console.warn("⚠️ Pista sin URL válida:", track);
     return;
@@ -97,10 +97,10 @@ function activarReproduccion(index, modo = "manual") {
   currentTrack = index;
 
   // Metadatos visibles en cabecera
-  if (currentTrackName) currentTrackName.textContent = track.title || "Sin título";
-  if (currentArtistName) currentArtistName.textContent = track.artist || "Artista desconocido";
+  if (currentTrackName) currentTrackName.textContent = track.title || "Untitled";
+  if (currentArtistName) currentArtistName.textContent = track.artist || Unknown artist";
   if (metaTrack) {
-    metaTrack.textContent = `${track.title || "Sin título"} — ${track.artist || "Artista desconocido"} | ${track.album || "Álbum desconocido"} | ${track.genero || "Género"} | ⏱ ${track.duracion || "--:--"}`;
+    metaTrack.textContent = `${track.title || "Untitled"} — ${track.artist || "Unknown artist"} | ${track.album || "Álbum desconocido"} | ${track.genero || "Género"} | ⏱ ${track.duracion || "--:--"}`;
   }
 
   // Actualizar marquesina con todos los ingredientes
@@ -136,14 +136,14 @@ function generarListaModal() {
   if (modoActual === "radio") {
     // Cabecera con lo último conocido (si existe)
     if (currentTrackNameModal) {
-      const titulo = currentTrackName?.textContent || "Cargando título…";
-      const artista = currentArtistName?.textContent || "Cargando artista…";
+      const titulo = currentTrackName?.textContent || "Loading...";
+      const artista = currentArtistName?.textContent || "Loading...";
       currentTrackNameModal.textContent = `${titulo} — ${artista}`;
     }
 
     if (trackHistory.length === 0) {
       const li = document.createElement("li");
-      li.textContent = "Esperando la primera actualización de pista...";
+      li.textContent = "Waiting for the first track update...";
       li.classList.add("radio-history-item");
       trackList.appendChild(li);
       return;
@@ -166,13 +166,13 @@ function generarListaModal() {
       const t = trackData[currentTrack];
       currentTrackNameModal.textContent = `${t.title} — ${t.artist || "Artista desconocido"}`;
     } else {
-      currentTrackNameModal.textContent = "Solo los mejores éxitos";
+      currentTrackNameModal.textContent = "Only the greatest hits";
     }
   }
 
   if (trackData.length === 0) {
     const li = document.createElement("li");
-    li.textContent = "No hay pistas cargadas todavía...";
+    li.textContent = "No tracks have been loaded yet...";
     trackList.appendChild(li);
     return;
   }
@@ -201,8 +201,8 @@ function activarModoRadio() {
   detenerActualizacionRadio();
 
   // Mensajes iniciales en cabecera
-  if (currentArtistName) currentArtistName.textContent = "Conectando...";
-  if (currentTrackName) currentTrackName.textContent = "Obteniendo datos...";
+  if (currentArtistName) currentArtistName.textContent = "Loading...";
+  if (currentTrackName) currentTrackName.textContent = "Loading...";
 
   // Carátula inicial: Plato
   if (discImg) {
@@ -279,7 +279,7 @@ if (musicBtn) {
     // Indicadores visuales
     const metaDiv = document.getElementById("track-metadata");
     if (metaDiv) {
-      metaDiv.innerHTML = `<span>${modoActual === "radio" ? "🔊 Radio Mode active" : "🎶 Local Mode active"}</span>`;
+      metaDiv.innerHTML = `<span>${modoActual === "radio" ? "🔊 Radio active mode" : "🎶 Local active mode"}</span>`;
     }
     musicBtn.style.backgroundColor = (modoActual === "radio") ? "#8e44ad" : "#3688ff";
   });
