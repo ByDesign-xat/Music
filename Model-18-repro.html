@@ -186,16 +186,33 @@
 
 <!-- Activación Ripples -->
 <script type="text/javascript">
-$(document).ready(function() {
-	try {
-		$('.bg-water').ripples({
-			resolution: 200,
-			perturbance: 0.04
-		});
-	}
-	catch (e) {
-		$('.error').show().text(e);
-	}
+$(window).on("load", function () {
+
+    $(".bg-water").ripples({
+        resolution: 256,
+        perturbance: 0.08,
+        interactive: true
+    });
+
+    let lastDrop = 0;
+
+    $(".bg-water").on("mousemove", function (e) {
+
+        const now = Date.now();
+
+        if (now - lastDrop < 120) return;
+
+        lastDrop = now;
+
+        $(this).ripples(
+            "drop",
+            e.offsetX,
+            e.offsetY,
+            15,
+            0.04
+        );
+    });
+
 });
 </script>
 
