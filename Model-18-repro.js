@@ -48,7 +48,7 @@ function validarCaratula(url) {
         discImg.classList.add("rotating");
     };
     img.onerror = () => {
-        discImg.src = "assets/covers/Cover1.png";
+        discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
         discImg.classList.add("rotating");
     };
     img.src = url;
@@ -58,10 +58,10 @@ function actualizarCaratula(track) {
     if (!discImg) return;
     if (modoActual === "local") {
         const currentTrackObj = track || (currentTrack !== null ? trackData[currentTrack] : null);
-        const cover = currentTrackObj?.cover || "assets/covers/Cover1.png";
+        const cover = currentTrackObj?.cover || "https://xatimg.com/image/OpwOSS8vdSd3.png";
         validarCaratula(cover);
     } else {
-        discImg.src = "assets/covers/Plato.png";
+        discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
         discImg.classList.add("rotating");
     }
 }
@@ -70,7 +70,7 @@ function actualizarCaratula(track) {
 // 📦 CARGA DE PISTAS (LOCAL)
 // ===============================
 function cargarTracksDesdeJSON() {
-    fetch("Model-18-repro10.json")
+    fetch("https://bydesign-xat.github.io/Music/Model-18-repro10.json")
         .then(res => res.json())
         .then(data => {
             trackData = data;
@@ -88,7 +88,7 @@ function activarReproduccion(index, modo = "manual") {
   const track = trackData[index];
 
   // Usamos dropbox_url como fuente principal
-  const url = track.dropbox_url;
+  const url = track.dropbox_url || track.url;
   if (!url) {
     console.warn("⚠️ Pista sin URL válida:", track);
     return;
@@ -97,8 +97,8 @@ function activarReproduccion(index, modo = "manual") {
   currentTrack = index;
 
   // Metadatos visibles en cabecera
-  if (currentTrackName) currentTrackName.textContent = track.title || "Sin título";
-  if (currentArtistName) currentArtistName.textContent = track.artist || "Artista desconocido";
+  if (currentTrackName) currentTrackName.textContent = track.name; || "Sin título";
+  if (currentArtistName) currentArtistName.textContent = track.artista; || "Artista desconocido";
   if (metaTrack) {
     metaTrack.textContent = `${track.title || "Sin título"} — ${track.artist || "Artista desconocido"} | ${track.album || "Álbum desconocido"} | ${track.genero || "Género"} | ⏱ ${track.duracion || "--:--"}`;
   }
@@ -206,7 +206,7 @@ function activarModoRadio() {
 
   // Carátula inicial: Plato
   if (discImg) {
-    discImg.src = "assets/covers/Plato.png";
+    discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
     discImg.classList.add("rotating");
   }
 
@@ -216,7 +216,7 @@ function activarModoRadio() {
 
   // Configuración del stream
   audio.pause();
-  audio.src = "https://technoplayerserver.net:8018/stream?icy=http";
+  audio.src = "https://radio.sonicpanel.ro:8118/stream?icy=http";
   audio.load();
   audio.muted = !gestureDetected;
 
@@ -279,7 +279,7 @@ if (musicBtn) {
     // Indicadores visuales
     const metaDiv = document.getElementById("track-metadata");
     if (metaDiv) {
-      metaDiv.innerHTML = `<span>${modoActual === "radio" ? "🔊 Modo Radio activo" : "🎶 Modo Local activo"}</span>`;
+      metaDiv.innerHTML = `<span>${modoActual === "radio" ? "🔊 Radio Mode active" : "🎶 Local Mode active"}</span>`;
     }
     musicBtn.style.backgroundColor = (modoActual === "radio") ? "#8e44ad" : "#3688ff";
   });
@@ -345,7 +345,7 @@ function detenerContadorRadioescuchas() {
 function iniciarActualizacionRadio() {
   detenerActualizacionRadio();
 
-  const radioUrl = "https://technoplayerserver.net:8018/currentsong?sid=1";
+  const radioUrl = "https://radio.sonicpanel.ro:8118/currentsong?sid=1";
   const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(radioUrl)}`;
 
   async function actualizar() {
@@ -370,7 +370,7 @@ function iniciarActualizacionRadio() {
       if (artist && title) {
         obtenerCaratulaDesdeiTunes(artist, title);
       } else if (discImg) {
-        discImg.src = "assets/covers/Plato.png";
+        discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
         discImg.classList.add("rotating");
       }
 
@@ -409,7 +409,7 @@ function obtenerCaratulaDesdeiTunes(artist, title) {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      let cover = "assets/covers/Plato.png"; // fallback
+      let cover = "https://xatimg.com/image/OpwOSS8vdSd3.png"; // fallback
       if (data.results && data.results.length > 0) {
         // iTunes devuelve artworkUrl100 → lo ampliamos a 400x400
         cover = data.results[0].artworkUrl100.replace("100x100", "400x400");
@@ -419,7 +419,7 @@ function obtenerCaratulaDesdeiTunes(artist, title) {
     })
     .catch(err => {
       console.warn("⚠️ Error obteniendo carátula desde iTunes:", err);
-      discImg.src = "assets/covers/Plato.png";
+      discImg.src = "https://xatimg.com/image/OpwOSS8vdSd3.png";
       discImg.classList.add("rotating");
     });
 }
