@@ -98,7 +98,7 @@ function activarReproduccion(index, modo = "manual") {
 
   // Metadatos visibles en cabecera
   if (currentTrackName) currentTrackName.textContent = track.title || "Untitled";
-  if (currentArtistName) currentArtistName.textContent = track.artist || Unknown artist";
+  if (currentArtistName) currentArtistName.textContent = track.artist || "Unknown artist";
   if (metaTrack) {
     metaTrack.textContent = `${track.title || "Untitled"} — ${track.artist || "Unknown artist"} | ${track.album || "Álbum desconocido"} | ${track.genero || "Género"} | ⏱ ${track.duracion || "--:--"}`;
   }
@@ -594,7 +594,7 @@ function actualizarMetadata(track) {
 // ===============================
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
-const container = document.getElementById("reproductor-rick");
+const container = document.querySelector(".bg-water");
 
 // 🔁 Ajustar tamaño del canvas al contenedor
 function resizeCanvas() {
