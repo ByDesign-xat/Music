@@ -562,7 +562,7 @@ shuffleBtn.addEventListener("click", () => {
   }
 });
 
-// ===============================
+// =============================
 // BOTON MENú
 // ===============================
 menuBtn.addEventListener("click", () => modalTracks.classList.remove("hidden"));
@@ -584,8 +584,8 @@ function actualizarMetadata(track) {
     return;
   }
 
-  // ✨ Ingredientes completos: título, artista, álbum, género y duración
-  const texto = `${track.title} — ${track.artist} | ${track.album} | ${track.genero} | ⏱ ${track.duracion}`;
+  // ✨ Ingredientes completos: artista, título, álbum, género y duración
+  const texto = `${track.artist} — ${track.title} | ${track.album} | ${track.genero} | ⏱ ${track.duracion}`;
   metadataDiv.innerHTML = `<span>${texto}</span>`;
 }
 
