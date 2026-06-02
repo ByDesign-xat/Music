@@ -97,8 +97,8 @@ function activarReproduccion(index, modo = "manual") {
   currentTrack = index;
 
   // Metadatos visibles en cabecera
-  if (currentTrackName) currentTrackName.textContent = track.name; || "Sin título";
-  if (currentArtistName) currentArtistName.textContent = track.artista; || "Artista desconocido";
+  if (currentTrackName) currentTrackName.textContent = track.title || "Sin título";
+  if (currentArtistName) currentArtistName.textContent = track.artist || "Artista desconocido";
   if (metaTrack) {
     metaTrack.textContent = `${track.title || "Sin título"} — ${track.artist || "Artista desconocido"} | ${track.album || "Álbum desconocido"} | ${track.genero || "Género"} | ⏱ ${track.duracion || "--:--"}`;
   }
