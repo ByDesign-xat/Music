@@ -1,0 +1,514 @@
+body {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  z-index: 0;
+}
+
+.bg-water{
+    position:relative;
+    width:480px;
+    height:650px;
+    overflow:hidden;
+    border-radius:20px;
+}
+
+.video-player-bg{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+}
+
+.repro-box {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* ===================== */
+/* 💿 PARTE 2: DISCO, ENCABEZADO Y TEXTOS */
+/* ===================== */
+
+.repro-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.btn-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.icon-menu {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+  transition: transform 0.3s ease;
+}
+
+.icon-menu:hover {
+  transform: scale(1.1);
+}
+
+/* MARQUESINA METADATOS con marco semitransparente */
+.repro-marquee {
+  position: absolute;
+    left: 20%;
+  width: 60%; /* un poco más estrecho para que se vea el marco */
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.2em;
+  color: #fff;
+  text-align: center;
+  /* marco estilo btn-music */
+  background-color: rgba(10,61,145, 0.4); /* semitransparente rosa */
+  border: 2px solid #0a3d91;
+  border-radius: 12px;
+  padding: 6px 12px;
+  box-shadow:
+    6px 6px 12px rgba(0, 0, 0, 0.9),
+    0 0 16px #3688ff;
+}
+
+.repro-marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 12s linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.repro-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.2em;
+  color: #0a3d91;
+  text-align: center;
+  flex: 1;
+}
+
+.repro-disc {
+  margin-bottom: 20px;
+}
+
+/* 🎧 Estado base: imagen circular sin animación */
+.disc-img {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+    border-color: aqua;
+  /* ❌ Eliminado box-shadow con color */
+  /* transform fijo eliminado para permitir animación */
+}
+
+/* 🔄 Estado activo: gira si tiene la clase 'rotating' */
+.rotating {
+  animation: spin 20s linear infinite;
+}
+
+/* 🌀 Rotación pausada para Plato.png */
+.rotating.plato {
+  animation: spin 10s linear infinite;
+}
+
+/* 🔁 Animación de giro */
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.repro-name {
+  position: relative;
+  font-size: 2.8em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  background: linear-gradient(
+  270deg,
+  #010101,
+  #0a3d91,
+  #ffffff,
+  #0a3d91,
+  #ffffff,
+  #0a3d91,
+  #010101
+); /* -------------------- GRADIENT TITLE -------------------- */
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 4s ease infinite;
+}
+
+.repro-name::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  color: white;
+  filter: blur(1px);
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.repro-id {
+  font-size: 1em;
+  color: black;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* ===================== */
+/* 🎶 Ecualizador dinámico */
+/* ===================== */
+
+#app {
+  position: relative;
+  z-index: 20;
+}
+
+.eq-empty {
+  stroke: #ffffff;
+  opacity: 0.9;
+  transition: stroke 0.3s ease, opacity 0.3s ease;
+}
+
+.eq-filled {
+  stroke: #0a3d91;
+  opacity: 1;
+  animation: eqPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes eqPulse {
+  0%, 100% {
+    stroke-opacity: 0.6;
+    transform: scaleY(1);
+  }
+  50% {
+    stroke-opacity: 1;
+    transform: scaleY(1.2);
+  }
+}
+
+/* ===================== */
+/* 🔘 Botones con aura y profundidad intensa */
+/* ===================== */
+
+#buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: -40px;
+}
+
+/* Botón base con transparencia y sombra ceremonial */
+.soft {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid #0a3d91;
+  box-shadow:
+    8px 8px 16px rgba(0, 0, 0, 0.95),   /* sombra abajo y derecha, muy marcada */
+    0 0 12px #0a3d91;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.soft:hover {
+  transform: scale(1.08);
+  box-shadow:
+    10px 10px 20px rgba(0, 0, 0, 6),    /* sombra más intensa al hover */
+    0 0 24px #0a3d91;
+}
+
+.repro-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .5rem;
+  z-index: 10;
+  position: relative;
+}
+
+/* Botón de reproducción central background-color: rgba(10,61,145, 0.9); */
+.btn-play {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 2px solid #0a3d91; /* Solid Color */
+  box-shadow:
+    10px 10px 20px rgba(0, 0, 0, 1),
+    0 0 24px #0a3d91;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.btn-play:hover {
+  transform: scale(1.08);
+  box-shadow:
+    12px 12px 24px rgba(0, 0, 0, 1),
+    0 0 32px #0a3d91;
+}
+
+/* SVG dentro de botones */
+button svg {
+  width: 70%;
+  height: 70%;
+  fill: #000;
+  pointer-events: none;
+}
+
+.btn-play svg path {
+  filter: url(#inset-shadow);
+  fill: #17191e;
+}
+
+.icon-pause,
+.icon-play {
+  transition: opacity 0.3s ease;
+}
+
+.btn-music {
+    position: absolute;
+    right: 30px;
+  background-color: rgba(10,61,145, 0.4);
+  border: 2px solid #0a3d91;
+  box-shadow:
+    10px 10px 20px rgba(0, 0, 0, 1),
+    0 0 24px #3688ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.btn-music:hover {
+  transform: scale(1.08);
+  box-shadow:
+    12px 12px 24px rgba(0, 0, 0, 1),
+    0 0 32px #3688ff;
+}
+
+/* SVG dentro de botones */
+.btn-music svg {
+  width:60%;
+  height: 60%;
+  pointer-events: none;
+}
+
+.btn-music svg path {
+  filter: url(#inset-shadow);
+  fill: #17191e;
+}
+
+/* ===================== */
+/* 🪟 Modal de Tracks */
+/* ===================== */
+.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  position: relative;
+  background-color: rgba(10, 20, 40, 0.05);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 2px solid #0a3d91;
+  border-radius: 12px;
+  padding: 24px 32px;
+  box-shadow: 0 0 24px #0a3d91;
+  color: #fff;
+  text-align: center;
+  max-width: 600px; /* ampliado para mayor visibilidad */
+  max-height: 80vh; /* altura limitada para scroll */
+  overflow-y: auto; /* scroll vertical */
+  z-index: 10000;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff #202020;
+}
+
+.modal:not(.hidden) .modal-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-x {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: #0a3d91;
+  cursor: pointer;
+  text-shadow: 0 0 8px #0a3d91;
+  z-index: 10001;
+}
+
+.modal-title {
+  font-size: 1.4em;
+  margin-bottom: 16px;
+  color: #0a3d91;
+  text-shadow: 0 0 10px #0a3d91;
+}
+
+.modal-info {
+  font-size: 0.95em;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+#current-track-name {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-left: 6px;
+  background: linear-gradient(
+  90deg,
+  #0a3d91,
+  #008aff
+); /* degradado */
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  animation: pulseTrack 1.5s infinite;
+  box-shadow: 0 0 6px rgba(54, 136, 255, 0.4);
+}
+
+@keyframes pulseTrack {
+  0% {
+    box-shadow: 0 0 6px rgba(10,61,145, 0.4); /* Rosa suave */
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(255, 148, 212, 0.8); /* Rosa claro vibrante */
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(10,61,145, 0.4); /* Rosa suave */
+  }
+}
+
+.track-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.track-list li {
+  margin: 8px 0;
+  font-size: 1em;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.track-list li:hover {
+  color: #0a3d91;
+  text-shadow: 0 0 8px #0a3d91;
+}
+
+#track-name.active {
+  color: #3688ff;
+  font-weight: bold;
+  text-shadow: 0 0 6px rgba(10,61,145, 0.5);
+  transition: all 300ms ease;
+}
+
+.custom-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #c2a044;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.1em;
+    text-shadow: 0 0 8px #c2a044;
+    box-shadow: 0 0 20px #d4af37b3; /* b3 ≈ 70% de opacidad */
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+.custom-message.show {
+    opacity: 1;
+}
+
+.active-track {
+    background: rgba(255, 255, 255, 0.20);
+    border-left: 4px solid #008aff;
+    color: #008aff !important;
+    font-weight: bold;
+    box-shadow: 0 0 12px rgba(0, 138, 255, 0.6);
+    border-radius: 6px;
+}
+
+.active-track:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.active-track {
+    color: #008aff !important;
+    animation: activeGlow 1.5s infinite alternate;
+}
